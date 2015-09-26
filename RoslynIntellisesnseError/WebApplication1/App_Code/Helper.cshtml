@@ -1,1 +1,11 @@
 ﻿
+@functions {
+    public static string GetActiveClassIf(string controllerName, string actionName = null)
+    {
+        var routeData = @HttpContext.Current.Request.RequestContext.RouteData;
+        string currentController = routeData.Values["controller"].ToString();
+        string currentAction = routeData.Values["action"].ToString();
+        return controllerName == currentController &&
+            (String.IsNullOrEmpty(actionName) || currentAction == actionName) ? "active" : "";
+    }
+}
